@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>별의 밝기 탐구실 · 중2 과학</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0B1026; --ink-2:#141B3C; --ink-3:#1E2750;
+  --paper:#F5F7FC; --paper-2:#FFFFFF;
+  --line-d:rgba(255,255,255,.14); --line-l:#DDE2EE;
+  --dim:#98A2C8; --gold:#FFC857; --blue:#9DB4FF;
+  --white-s:#E8EEFF; --orange:#FFB067; --coral:#FF7A59; --ok:#4ECBA0;
+  --serif:'Gowun Batang',serif;
+  --sans:'Noto Sans KR',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--ink);color:var(--white-s);font-family:var(--sans);
+  font-size:16px;line-height:1.7;-webkit-text-size-adjust:100%}
+.wrap{max-width:900px;margin:0 auto;padding:0 20px 72px}
+
+header{position:relative;overflow:hidden;padding:48px 0 34px;text-align:center}
+#stars{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.eyebrow{position:relative;font-family:var(--mono);font-size:12px;letter-spacing:.22em;
+  color:var(--gold);text-transform:uppercase;margin:0 0 12px}
+h1{position:relative;font-family:var(--serif);font-weight:700;
+  font-size:clamp(28px,6vw,42px);line-height:1.25;margin:0 0 10px;color:#fff}
+.sub{position:relative;margin:0;color:var(--dim);font-size:14.5px}
+
+nav.tabs{display:flex;gap:4px;margin:0 0 24px;padding:5px;
+  background:var(--ink-2);border:1px solid var(--line-d);border-radius:14px}
+nav.tabs button{flex:1;padding:11px 4px;border:0;border-radius:10px;cursor:pointer;
+  background:transparent;color:var(--dim);font-family:var(--sans);
+  font-size:14px;font-weight:500;transition:background .18s,color .18s}
+nav.tabs button:hover{color:var(--white-s)}
+nav.tabs button[aria-selected="true"]{background:var(--gold);color:#241A00;font-weight:700}
+nav.tabs button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+section[role="tabpanel"][hidden]{display:none}
+
+.card{background:var(--paper);color:#101632;border-radius:16px;padding:24px;margin:0 0 18px}
+.card.dark{background:var(--ink-2);color:var(--white-s);border:1px solid var(--line-d)}
+h2{font-family:var(--serif);font-size:21px;font-weight:700;margin:0 0 6px;line-height:1.35}
+h3{font-size:14.5px;font-weight:700;margin:22px 0 10px}
+h3:first-child{margin-top:0}
+.lede{margin:0 0 16px;font-size:14.5px;color:#4A5375}
+.card.dark .lede{color:var(--dim)}
+.step{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+  color:#8A93B4;margin:0 0 4px}
+.card.dark .step{color:var(--dim)}
+
+.chips{display:inline-flex;flex-wrap:wrap;gap:4px;padding:4px;background:#E9EDF6;border-radius:10px}
+.card.dark .chips{background:var(--ink-3)}
+.chips button{padding:7px 13px;border:0;border-radius:7px;background:transparent;cursor:pointer;
+  color:#5A6488;font-family:var(--sans);font-size:13.5px;font-weight:500}
+.card.dark .chips button{color:var(--dim)}
+.chips button[aria-pressed="true"]{background:var(--paper-2);color:#101632;font-weight:700}
+.card.dark .chips button[aria-pressed="true"]{background:var(--gold);color:#241A00}
+.chips button:focus-visible{outline:2px solid #4A6FE3;outline-offset:1px}
+.fieldrow{margin:0 0 16px}
+.fieldrow>label{display:block;font-size:13px;font-weight:700;color:#5A6488;margin:0 0 7px}
+.card.dark .fieldrow>label{color:var(--dim)}
+input.text{width:100%;padding:11px 13px;border:1px solid var(--line-l);border-radius:9px;
+  font-family:var(--sans);font-size:15px;background:var(--paper-2);color:#101632}
+input.text:focus{outline:2px solid #4A6FE3;outline-offset:-1px;border-color:transparent}
+.card.dark input.text{background:var(--ink);border-color:var(--line-d);color:var(--white-s)}
+
+table.data{width:100%;border-collapse:collapse;font-family:var(--mono)}
+table.data th{font-family:var(--sans);font-size:11.5px;font-weight:700;color:#5A6488;
+  text-align:center;padding:0 4px 8px;border-bottom:1px solid var(--line-l)}
+table.data th:first-child{text-align:left}
+table.data td{padding:5px 3px}
+table.data input{width:100%;padding:9px 6px;border:1px solid var(--line-l);border-radius:8px;
+  font-family:var(--mono);font-size:14.5px;background:var(--paper-2);color:#101632;text-align:center}
+table.data input:focus{outline:2px solid #4A6FE3;outline-offset:-1px;border-color:transparent}
+td.dist{font-family:var(--mono);font-size:14.5px;font-weight:500;padding-left:4px;white-space:nowrap}
+td.avg{font-family:var(--mono);font-size:14.5px;font-weight:500;text-align:center;color:#2A78D6}
+td.del{width:34px;padding-left:0}
+button.x{width:28px;height:28px;border:0;border-radius:7px;background:#E9EDF6;
+  color:#7A84A8;cursor:pointer;font-size:16px;line-height:1;padding:0}
+button.x:hover{background:#DCE2F0;color:#101632}
+button.x:disabled{opacity:.3;cursor:default}
+button.x:focus-visible{outline:2px solid #4A6FE3;outline-offset:1px}
+table.data input.dist-in{font-weight:500;color:#232C4E}
+
+.btnrow{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0}
+button.btn{padding:10px 16px;border-radius:9px;border:1px solid #C9D1E4;background:var(--paper-2);
+  color:#232C4E;font-family:var(--sans);font-size:14px;font-weight:500;cursor:pointer}
+button.btn:hover{background:#EDF1F9}
+button.btn.primary{background:#232C4E;border-color:#232C4E;color:#fff}
+button.btn.primary:hover{background:#101632}
+button.btn:disabled{opacity:.5;cursor:default}
+button.btn:focus-visible{outline:2px solid #4A6FE3;outline-offset:2px}
+.card.dark button.btn{background:var(--ink-3);border-color:var(--line-d);color:var(--white-s)}
+.card.dark button.btn:hover{background:#28336A}
+.card.dark button.btn.primary{background:var(--gold);border-color:var(--gold);color:#241A00;font-weight:700}
+
+svg.chart{width:100%;height:auto;display:block;background:var(--paper-2);border-radius:12px}
+.card.dark svg.chart{background:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin:12px 0 0;font-size:12.5px;color:#5A6488}
+.card.dark .legend{color:var(--dim)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.swatch{width:14px;height:3px;border-radius:2px;display:inline-block}
+
+.verdict{margin:16px 0 0;padding:15px 17px;border-radius:12px;font-size:14px}
+.verdict.good{background:#E4F6EE;color:#0D4F38}
+.verdict.warn{background:#FFF2DE;color:#5A3D00}
+.verdict.none{background:#EDF1F9;color:#5A6488}
+.verdict strong{display:block;margin:0 0 6px;font-size:14.5px}
+.verdict ul{margin:8px 0 0;padding-left:18px}
+.verdict li{margin:3px 0}
+.mono{font-family:var(--mono)}
+
+.qbox{border-top:1px solid var(--line-l);padding:18px 0 0;margin:18px 0 0}
+.qbox:first-of-type{border-top:0;padding-top:0;margin-top:0}
+.qlab{font-size:14.5px;font-weight:500;margin:0 0 9px;line-height:1.6}
+.qlab .n{font-family:var(--mono);font-size:12px;color:#8A93B4;margin-right:7px}
+textarea.ans{width:100%;min-height:74px;padding:11px 13px;border:1px solid var(--line-l);
+  border-radius:9px;font-family:var(--sans);font-size:14.5px;line-height:1.6;
+  background:var(--paper-2);color:#101632;resize:vertical}
+textarea.ans:focus{outline:2px solid #4A6FE3;outline-offset:-1px;border-color:transparent}
+.numline{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.numline input{width:110px;padding:10px 12px;border:1px solid var(--line-l);border-radius:9px;
+  font-family:var(--mono);font-size:15px;background:var(--paper-2);color:#101632;text-align:center}
+.numline .unit{font-size:14px;color:#5A6488}
+.fb{margin:9px 0 0;padding:10px 13px;border-radius:9px;font-size:13.5px;line-height:1.6}
+.fb.ok{background:#E4F6EE;color:#0D4F38}
+.fb.no{background:#FFF2DE;color:#5A3D00}
+
+.status{margin:14px 0 0;padding:13px 16px;border-radius:11px;font-size:13.5px;line-height:1.6}
+.status.ok{background:#E4F6EE;color:#0D4F38}
+.status.err{background:#FDECE7;color:#7A2A12}
+.status.info{background:#EDF1F9;color:#3A4468}
+.card.dark .status.info{background:var(--ink-3);color:var(--dim)}
+.codebox{width:100%;min-height:70px;margin:10px 0 0;padding:11px;border:1px solid var(--line-l);
+  border-radius:9px;font-family:var(--mono);font-size:12px;background:var(--paper-2);
+  color:#3A4468;resize:vertical;word-break:break-all}
+
+.tgrid{display:grid;grid-template-columns:44px repeat(8,1fr);gap:6px;margin:14px 0 0}
+.tgrid .hd{font-family:var(--mono);font-size:11px;color:var(--dim);
+  display:flex;align-items:center;justify-content:center;min-height:26px}
+.cell{border:1px solid var(--line-d);border-radius:9px;background:var(--ink-3);
+  padding:8px 4px;text-align:center;cursor:pointer;min-height:52px;
+  display:flex;flex-direction:column;justify-content:center;gap:2px}
+.cell.empty{background:transparent;border-style:dashed;opacity:.45;cursor:default}
+.cell.done{background:#173A2E;border-color:#2E7A5D}
+.cell.part{background:#3D3115;border-color:#8A6A1E}
+.cell .st{font-size:11px;color:var(--dim);line-height:1.3}
+.cell.done .st{color:#8FE3C2}
+.cell.part .st{color:#FFD98A}
+.cell .nm{font-size:11.5px;color:var(--white-s);line-height:1.3;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cell[aria-current="true"]{outline:2px solid var(--gold);outline-offset:1px}
+
+.tmeta{display:flex;flex-wrap:wrap;gap:8px 20px;margin:0 0 14px;font-size:13px;color:var(--dim)}
+.tmeta b{color:var(--white-s);font-weight:500}
+.qa{margin:0 0 12px;padding:13px 15px;background:var(--ink-3);border-radius:11px;
+  border:1px solid var(--line-d)}
+.qa .qq{font-size:12.5px;color:var(--dim);margin:0 0 5px;line-height:1.5}
+.qa .aa{font-size:14.5px;margin:0;line-height:1.65;white-space:pre-wrap}
+.qa .aa.blank{color:#6B7398;font-style:italic}
+table.mini{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:13.5px;margin:0 0 14px}
+table.mini th{font-family:var(--sans);font-size:11.5px;color:var(--dim);font-weight:700;
+  text-align:center;padding:0 6px 7px;border-bottom:1px solid var(--line-d)}
+table.mini td{padding:7px 6px;text-align:center;border-bottom:1px solid rgba(255,255,255,.06)}
+
+svg.ruler{width:100%;height:auto;display:block;overflow:visible}
+svg.spread{width:100%;height:auto;display:block}
+.stat3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0 0}
+.stat{background:var(--ink-3);border:1px solid var(--line-d);border-radius:12px;
+  padding:14px 10px;text-align:center}
+.stat .v{display:block;font-family:var(--serif);font-size:clamp(18px,4.2vw,24px);
+  font-weight:700;color:var(--gold);line-height:1.3}
+.stat .k{display:block;font-size:11.5px;color:var(--dim);margin:4px 0 0}
+@media(max-width:620px){
+  .stat3{grid-template-columns:1fr;gap:8px}
+  .stat{display:flex;align-items:baseline;justify-content:space-between;
+    text-align:left;padding:11px 14px}
+  .stat .k{margin:0}
+}
+.star-dot{cursor:pointer;transition:cx .7s cubic-bezier(.45,.05,.3,1),r .7s cubic-bezier(.45,.05,.3,1)}
+.star-lbl{transition:x .7s cubic-bezier(.45,.05,.3,1);cursor:pointer}
+.star-tick{transition:x1 .7s cubic-bezier(.45,.05,.3,1),x2 .7s cubic-bezier(.45,.05,.3,1)}
+@media (prefers-reduced-motion:reduce){.star-dot,.star-lbl,.star-tick{transition:none}}
+.detail{margin:16px 0 0;padding:16px 18px;background:var(--ink-3);border-radius:12px;
+  border:1px solid var(--line-d);font-size:14px}
+.detail .name{font-family:var(--serif);font-size:19px;font-weight:700;color:#fff;margin:0 0 8px}
+.detail dl{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:0;font-size:14px}
+.detail dt{color:var(--dim)}
+.detail dd{margin:0;font-family:var(--mono)}
+.detail p{margin:10px 0 0;color:var(--dim);font-size:13.5px;line-height:1.6}
+
+.sliderow{display:flex;align-items:center;gap:14px;margin:0 0 12px}
+.sliderow label{font-size:14px;min-width:104px;color:var(--dim)}
+input[type=range]{flex:1;accent-color:var(--gold);height:24px}
+.readout{font-family:var(--mono);font-size:15px;min-width:52px;text-align:right;font-weight:500}
+.result{margin:14px 0 0;padding:18px;border-radius:12px;background:var(--ink-3);
+  border:1px solid var(--line-d);text-align:center}
+.result .big{font-family:var(--serif);font-size:clamp(24px,5.5vw,34px);font-weight:700;
+  color:var(--gold);display:block;line-height:1.3}
+.result .cap{font-size:13.5px;color:var(--dim);margin:4px 0 0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.numin{width:100%;padding:10px;border:1px solid var(--line-d);border-radius:9px;
+  background:var(--ink);color:var(--white-s);font-family:var(--mono);font-size:15px}
+.numin:focus{outline:2px solid var(--blue);outline-offset:-1px}
+.numlbl{font-size:12.5px;color:var(--dim);display:block;margin:0 0 5px}
+
+.q{border-top:1px solid var(--line-l);padding:20px 0 4px}
+.q:first-of-type{border-top:0;padding-top:0}
+.qnum{font-family:var(--mono);font-size:12px;color:#8A93B4;letter-spacing:.1em}
+.qtext{font-size:15px;font-weight:500;margin:4px 0 12px;line-height:1.6}
+.badge{display:inline-block;padding:1px 8px;border-radius:20px;background:#FFF2DE;
+  color:#7A5200;font-size:11px;font-weight:700;margin-left:6px;vertical-align:2px}
+.opts{display:flex;flex-direction:column;gap:7px}
+.opts button{text-align:left;padding:12px 14px;border:1px solid var(--line-l);border-radius:10px;
+  background:var(--paper-2);color:#232C4E;font-family:var(--sans);font-size:14.5px;
+  cursor:pointer;line-height:1.5}
+.opts button:hover:not(:disabled){border-color:#8E9AC4;background:#F0F3FA}
+.opts button:disabled{cursor:default}
+.opts button.right{background:#E4F6EE;border-color:#4ECBA0;color:#0D4F38;font-weight:500}
+.opts button.wrong{background:#FDECE7;border-color:#FF7A59;color:#7A2A12}
+.opts button:focus-visible{outline:2px solid #4A6FE3;outline-offset:2px}
+.why{margin:11px 0 0;padding:12px 14px;background:#EDF1F9;border-radius:10px;
+  font-size:13.5px;color:#3A4468;line-height:1.6}
+.score{margin:22px 0 0;padding:20px;border-radius:12px;background:#232C4E;color:#fff;text-align:center}
+.score .big{font-family:var(--serif);font-size:32px;font-weight:700;display:block;color:var(--gold)}
+
+#errBanner{background:#FDECE7;color:#7A2A12;padding:14px 20px;font-size:14px;
+  line-height:1.6;font-family:var(--mono);word-break:break-word}
+#errBanner[hidden]{display:none}
+.foot{text-align:center;color:#5B6490;font-size:12.5px;margin:34px 0 0;line-height:1.8}
+
+@media (max-width:620px){
+  .wrap{padding:0 13px 56px}
+  .card{padding:18px 14px}
+  nav.tabs button{font-size:12.5px;padding:10px 2px}
+  .grid2{grid-template-columns:1fr}
+  .sliderow{flex-wrap:wrap}
+  .sliderow label{min-width:100%}
+  .tgrid{grid-template-columns:30px repeat(8,1fr);gap:3px}
+  .cell{padding:6px 2px;min-height:44px}
+  .cell .nm{font-size:10px}
+  .cell .st{font-size:10px}
+  table.data input{font-size:13.5px;padding:8px 3px}
+  td.dist{font-size:13px}
+}
+</style>
+</head>
+<body>
+
+<div id="errBanner" hidden></div>
+<script>
+/* 문제가 생기면 화면에 그대로 보여 줍니다. 이 조각은 가장 먼저 실행됩니다. */
+(function(){
+  function show(msg){
+    var b=document.getElementById('errBanner');
+    if(!b)return;
+    b.hidden=false;
+    b.textContent='앱을 실행하지 못했습니다 · '+msg;
+  }
+  window.__stellarError=show;
+  window.addEventListener('error',function(e){
+    show((e.message||'알 수 없는 오류')+(e.lineno?' (줄 '+e.lineno+')':''));
+  });
+})();
+</script>
+
+<header>
+  <svg id="stars" aria-hidden="true"></svg>
+  <div class="wrap">
+    <p class="eyebrow">Ⅷ. 별과 우주 · 별의 밝기와 등급</p>
+    <h1>별의 밝기 탐구실</h1>
+    <p class="sub">모둠이 측정한 빛의 세기를 그래프로 바꾸어 거리와 밝기의 관계를 살펴봅니다.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+<nav class="tabs" role="tablist" aria-label="화면 선택">
+  <button role="tab" id="t1" aria-controls="p1" aria-selected="true">모둠 활동</button>
+  <button role="tab" id="t4" aria-controls="p4" aria-selected="false">교사용</button>
+</nav>
+
+<!-- ================= PANEL 1 ================= -->
+<section role="tabpanel" id="p1" aria-labelledby="t1">
+
+  <div class="card">
+    <p class="step">1단계</p>
+    <h2>우리 모둠</h2>
+    <p class="lede">반과 모둠을 고르고 모둠원 이름을 적습니다. 이미 저장한 자료가 있으면 자동으로 불러옵니다.</p>
+    <div class="fieldrow">
+      <label id="lblCls">반</label>
+      <div class="chips" role="group" aria-labelledby="lblCls" id="clsChips"></div>
+    </div>
+    <div class="fieldrow">
+      <label id="lblGrp">모둠</label>
+      <div class="chips" role="group" aria-labelledby="lblGrp" id="grpChips"></div>
+    </div>
+    <div class="fieldrow">
+      <label for="members">모둠원 이름</label>
+      <input class="text" type="text" id="members" placeholder="예) 김서연, 박지호, 이하람, 최민준">
+    </div>
+    <div class="status info" id="loadStatus">반과 모둠을 골라 주세요.</div>
+  </div>
+
+  <div class="card">
+    <p class="step">2단계</p>
+    <h2>측정한 값 넣기</h2>
+    <p class="lede">거리는 <strong>20 cm · 40 cm · 60 cm · 80 cm</strong>로 정해져 있습니다. 같은 거리에서 최대 세 번까지 재고 평균을 냅니다. 한 번만 재도 괜찮습니다. 거리는 <strong>전구 중심에서 조도 센서까지</strong>를 잰 값이어야 합니다.</p>
+    <table class="data">
+      <thead><tr>
+        <th style="width:22%">거리 (cm)</th><th>1회</th><th>2회</th><th>3회</th>
+        <th style="width:18%">평균 (lx)</th>
+      </tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <p class="step">3단계</p>
+    <h2>그래프로 보기</h2>
+    <div style="margin:0 0 12px">
+      <div class="chips" role="group" aria-label="그래프 단위">
+        <button id="modeLux" aria-pressed="true">평균값 (lx)</button>
+        <button id="modeRel" aria-pressed="false">비율로 보기</button>
+      </div>
+    </div>
+    <svg class="chart" id="chart" viewBox="0 0 640 380" role="img" aria-labelledby="chartTitle">
+      <title id="chartTitle">거리에 따른 빛의 세기 그래프</title>
+    </svg>
+    <div class="legend">
+      <span><i class="swatch" style="background:#2A78D6"></i>우리 모둠이 측정한 값</span>
+      <span><i class="swatch" style="background:#FF7A59"></i>거리의 제곱에 반비례할 때</span>
+    </div>
+    <div class="verdict none" id="verdict">값을 두 줄 이상 넣으면 그래프와 분석이 나타납니다.</div>
+  </div>
+
+  <div class="card">
+    <p class="step">4단계</p>
+    <h2>제출하기</h2>
+    <p class="lede">제출한 뒤에도 값을 고쳐서 다시 제출할 수 있습니다.</p>
+    <div class="btnrow">
+      <button class="btn primary" id="submitBtn">모둠 자료 제출</button>
+      <button class="btn" id="savePng">그래프 이미지로 저장</button>
+    </div>
+    <div class="status info" id="submitStatus">아직 제출하지 않았습니다.</div>
+    <div id="codeArea" hidden>
+      <p class="lede" style="margin:14px 0 0;font-size:13.5px">아래 제출 코드를 복사해 선생님께 전달하세요.</p>
+      <textarea class="codebox" id="codeOut" readonly></textarea>
+      <div class="btnrow"><button class="btn" id="copyCode">제출 코드 복사</button></div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ================= PANEL 4 ================= -->
+<section role="tabpanel" id="p4" aria-labelledby="t4" hidden>
+
+  <div class="card dark" id="pinCard">
+    <h2>교사용 화면</h2>
+    <p class="lede">모둠이 제출한 자료를 모아서 봅니다.</p>
+    <div class="fieldrow" style="max-width:240px">
+      <label for="pinIn">교사 비밀번호</label>
+      <input class="text" type="password" id="pinIn" inputmode="numeric" placeholder="비밀번호">
+    </div>
+    <div class="btnrow"><button class="btn primary" id="pinBtn">열기</button></div>
+    <div class="status err" id="pinErr" hidden>비밀번호가 맞지 않습니다.</div>
+  </div>
+
+  <div id="tPanel" hidden>
+    <div class="card dark">
+      <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between">
+        <h2 style="margin:0">제출 현황</h2>
+        <div class="chips" role="group" aria-label="반 선택" id="tClsChips"></div>
+      </div>
+      <div class="tmeta" id="tSummary"></div>
+      <div class="tgrid" id="tGrid"></div>
+      <div class="btnrow">
+        <button class="btn" id="tRefresh">새로 고침</button>
+        <button class="btn" id="tCsv">CSV로 내려받기</button>
+        <button class="btn" id="tImport">제출 코드 넣기</button>
+      </div>
+      <div class="status info" id="tStatus"></div>
+    </div>
+
+    <div class="card dark">
+      <h2>반 전체 겹쳐 보기</h2>
+      <p class="lede">가로축은 <strong style="color:var(--gold)">첫 거리(20 cm)의 몇 배</strong>, 세로축은 <strong style="color:var(--gold)">첫 측정값의 몇 배</strong>로 맞췄습니다. 주황 점선에 가까울수록 이론값에 잘 맞은 모둠입니다.</p>
+      <svg class="chart" id="tChart" viewBox="0 0 640 380" role="img" aria-label="모둠별 측정 결과를 겹쳐 그린 그래프"></svg>
+      <div class="legend" id="tLegend"></div>
+    </div>
+
+    <div class="card dark" id="tDetailCard">
+      <h2>모둠별 자료</h2>
+      <div id="tDetail"></div>
+    </div>
+  </div>
+</section>
+
+<p class="foot">
+  중학교 2학년 과학 · Ⅷ. 별과 우주 — 별의 밝기와 등급<br>
+  등급과 거리 값은 교과서와 자료에 따라 조금씩 다를 수 있습니다.
+</p>
+
+</div>
+
+<script>
+/* ============================================================
+   설정 — 선생님이 고치는 곳은 아래 두 줄뿐입니다.
+
+   ENDPOINT     : 구글 Apps Script 웹앱 주소. 비워 두면 이 기기에만 저장됩니다.
+   TEACHER_PIN  : 교사용 화면 비밀번호. 반드시 바꿔 주세요.
+
+   따옴표는 반드시 곧은 따옴표(')여야 합니다. 문서에서 붙여 넣으면
+   둥근 따옴표(‘ ’)로 바뀌는 일이 있으니 직접 다시 쳐 주세요.
+   ============================================================ */
+window.STELLAR_CONFIG = {
+  ENDPOINT: 'https://script.google.com/macros/s/AKfycbw4MjL0n9QEl8XkKHzfGxZQQVOO0DQEn6nWDLQ9kmyIEOwCtAgapaPazLsL2dD1OZ036g/exec',
+  TEACHER_PIN: '0103'
+};
+</script>
+
+<script>
+(function(){
+'use strict';
+
+/* 설정을 읽되, 설정이 잘못되어도 앱 자체는 계속 동작하게 합니다. */
+var raw = window.STELLAR_CONFIG || {};
+var CONFIG = {
+  ENDPOINT: String(raw.ENDPOINT == null ? '' : raw.ENDPOINT)
+              .replace(/[\u2018\u2019\u201C\u201D]/g,'').trim(),
+  TEACHER_PIN: String(raw.TEACHER_PIN == null ? '0000' : raw.TEACHER_PIN).trim()
+};
+if(CONFIG.ENDPOINT && CONFIG.ENDPOINT.indexOf('http') !== 0){
+  if(window.__stellarError)window.__stellarError(
+    '설정의 ENDPOINT 주소가 http로 시작하지 않습니다. 이 기기에만 저장됩니다.');
+  CONFIG.ENDPOINT='';
+}
+if(!window.STELLAR_CONFIG && window.__stellarError){
+  window.__stellarError('설정 부분에 오류가 있어 기본값으로 실행합니다. CONFIG의 따옴표를 확인해 주세요.');
+}
+
+var CLASSES=[1,2,3,4,5,6,7], GROUPS=[1,2,3,4,5,6,7,8];
+var DISTS=[20,40,60,80];
+var SVGNS='http://www.w3.org/2000/svg';
+
+/* ---------- 저장소 ---------- */
+var Store=(function(){
+  var mode='local', mem={};
+  if(CONFIG.ENDPOINT) mode='remote';
+  else if(window.storage && window.storage.set) mode='artifact';
+
+  function lsGet(k){try{return window.localStorage.getItem(k);}catch(e){return mem[k]||null;}}
+  function lsSet(k,v){try{window.localStorage.setItem(k,v);}catch(e){mem[k]=v;}}
+  function lsKeys(){
+    var out=[];
+    try{
+      for(var i=0;i<window.localStorage.length;i++){
+        var k=window.localStorage.key(i);
+        if(k&&k.indexOf('grp:')===0)out.push(k);
+      }
+    }catch(e){for(var m in mem)if(m.indexOf('grp:')===0)out.push(m);}
+    return out;
+  }
+  return {
+    mode:mode,
+    label:function(){
+      return mode==='remote'?'구글 시트에 저장됩니다'
+           :mode==='artifact'?'공용 저장소에 저장됩니다'
+           :'이 기기에만 저장됩니다';
+    },
+    save:function(rec){
+      if(mode==='remote'){
+        return fetch(CONFIG.ENDPOINT,{method:'POST',
+          headers:{'Content-Type':'text/plain;charset=utf-8'},
+          body:JSON.stringify(rec)})
+          .then(function(r){return r.json();})
+          .then(function(j){
+            if(!j||!j.ok)throw new Error(j&&j.error?j.error:'저장 실패');
+            return true;
+          });
+      }
+      if(mode==='artifact'){
+        return window.storage.set(rec.key,JSON.stringify(rec),true).then(function(){return true;});
+      }
+      lsSet(rec.key,JSON.stringify(rec));
+      return Promise.resolve(true);
+    },
+    load:function(key){
+      if(mode==='artifact'){
+        return window.storage.get(key,true)
+          .then(function(r){return r&&r.value?JSON.parse(r.value):null;})
+          .catch(function(){return null;});
+      }
+      if(mode==='remote'){
+        return this.loadAll().then(function(list){
+          for(var i=0;i<list.length;i++)if(list[i].key===key)return list[i];
+          return null;
+        }).catch(function(){return null;});
+      }
+      var v=lsGet(key);
+      return Promise.resolve(v?JSON.parse(v):null);
+    },
+    loadAll:function(){
+      if(mode==='remote'){
+        return fetch(CONFIG.ENDPOINT+'?action=list&t='+Date.now())
+          .then(function(r){return r.json();})
+          .then(function(j){return (j&&j.list)?j.list:[];});
+      }
+      if(mode==='artifact'){
+        return window.storage.list('grp:',true).then(function(r){
+          var keys=(r&&r.keys)?r.keys:[];
+          return Promise.all(keys.map(function(k){
+            var kk=(typeof k==='string')?k:k.key;
+            return window.storage.get(kk,true)
+              .then(function(v){return v&&v.value?JSON.parse(v.value):null;})
+              .catch(function(){return null;});
+          }));
+        }).then(function(a){return a.filter(Boolean);}).catch(function(){return [];});
+      }
+      return Promise.resolve(lsKeys().map(function(k){
+        try{return JSON.parse(lsGet(k));}catch(e){return null;}
+      }).filter(Boolean));
+    },
+    saveLocalCopy:function(rec){lsSet(rec.key,JSON.stringify(rec));}
+  };
+})();
+
+/* ---------- 공용 도구 ---------- */
+function el(tag,attrs,text){
+  var e=document.createElementNS(SVGNS,tag);
+  for(var k in attrs)e.setAttribute(k,attrs[k]);
+  if(text!=null)e.textContent=text;
+  return e;
+}
+function niceTicks(max,target){
+  if(!(max>0))return [0,1];
+  var raw=max/target,mag=Math.pow(10,Math.floor(Math.log(raw)/Math.LN10)),
+      norm=raw/mag,step;
+  if(norm<=1)step=1;else if(norm<=2)step=2;else if(norm<=5)step=5;else step=10;
+  step*=mag;
+  var t=[];for(var v=0;v<=max+step*.001;v+=step)t.push(v);
+  return t;
+}
+function fmt(v){
+  if(v===0)return '0';
+  if(Math.abs(v)>=100)return String(Math.round(v));
+  if(Math.abs(v)>=10)return v.toFixed(0);
+  if(Math.abs(v)>=1)return v.toFixed(1);
+  return v.toFixed(2);
+}
+function expoOf(pts){
+  var n=pts.length;
+  if(n<2)return null;
+  var sx=0,sy=0,sxy=0,sxx=0;
+  pts.forEach(function(p){
+    var lx=Math.log(p.d),ly=Math.log(p.l);
+    sx+=lx;sy+=ly;sxy+=lx*ly;sxx+=lx*lx;
+  });
+  var den=n*sxx-sx*sx;
+  if(Math.abs(den)<1e-12)return null;
+  return -((n*sxy-sx*sy)/den);
+}
+function esc(s){
+  return String(s).replace(/[&<>"]/g,function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];
+  });
+}
+
+/* ---------- 그래프 ---------- */
+function drawChart(svg,cfg){
+  while(svg.childNodes.length>(cfg.keep||0))svg.removeChild(svg.lastChild);
+  var W=640,H=380,PL=64,PR=22,PT=24,PB=56,iw=W-PL-PR,ih=H-PT-PB,
+      dark=!!cfg.dark,
+      gridC=dark?'rgba(255,255,255,.09)':'#E6EAF3',
+      axisC=dark?'rgba(255,255,255,.28)':'#C3CADC',
+      tickC=dark?'#98A2C8':'#8A93B4',
+      labC=dark?'#98A2C8':'#5A6488';
+
+  if(!cfg.series.length||!cfg.series.some(function(s){return s.pts.length>1;})){
+    svg.appendChild(el('text',{x:W/2,y:H/2,'text-anchor':'middle',fill:tickC,
+      'font-size':'15','font-family':'Noto Sans KR, sans-serif'},cfg.empty||'자료가 없습니다'));
+    return;
+  }
+  var allX=[],allY=[];
+  cfg.series.forEach(function(s){s.pts.forEach(function(p){allX.push(p.x);allY.push(p.y);});});
+  var xTicks=niceTicks(Math.max.apply(null,allX)*1.1,5),xTop=xTicks[xTicks.length-1],
+      yTicks=niceTicks(Math.max.apply(null,allY)*1.12,4),yTop=yTicks[yTicks.length-1];
+  function X(v){return PL+v/xTop*iw;}
+  function Y(v){return PT+ih-v/yTop*ih;}
+
+  yTicks.forEach(function(t){
+    svg.appendChild(el('line',{x1:PL,y1:Y(t),x2:PL+iw,y2:Y(t),stroke:gridC,'stroke-width':1}));
+    svg.appendChild(el('text',{x:PL-10,y:Y(t)+4,'text-anchor':'end',fill:tickC,
+      'font-size':'12','font-family':'IBM Plex Mono, monospace'},fmt(t)));
+  });
+  xTicks.forEach(function(t){
+    if(t===0)return;
+    svg.appendChild(el('text',{x:X(t),y:PT+ih+22,'text-anchor':'middle',fill:tickC,
+      'font-size':'12','font-family':'IBM Plex Mono, monospace'},fmt(t)));
+  });
+  svg.appendChild(el('line',{x1:PL,y1:PT+ih,x2:PL+iw,y2:PT+ih,stroke:axisC,'stroke-width':1.5}));
+  svg.appendChild(el('text',{x:PL+iw/2,y:H-14,'text-anchor':'middle',fill:labC,
+    'font-size':'13','font-family':'Noto Sans KR, sans-serif'},cfg.xLabel));
+  svg.appendChild(el('text',{x:16,y:PT+ih/2,'text-anchor':'middle',fill:labC,
+    'font-size':'13','font-family':'Noto Sans KR, sans-serif',
+    transform:'rotate(-90,16,'+(PT+ih/2)+')'},cfg.yLabel));
+
+  cfg.series.forEach(function(s){
+    var inside=s.pts.filter(function(p){return p.y<=yTop*1.02&&p.x<=xTop*1.02;});
+    if(inside.length<2)return;
+    var attrs={points:inside.map(function(p){return X(p.x)+','+Y(p.y);}).join(' '),
+      fill:'none',stroke:s.color,'stroke-width':s.w||2.5,
+      'stroke-linejoin':'round','stroke-linecap':'round'};
+    if(s.dash)attrs['stroke-dasharray']=s.dash;
+    if(s.op)attrs.opacity=s.op;
+    svg.appendChild(el('polyline',attrs));
+    if(s.dots){
+      inside.forEach(function(p){
+        svg.appendChild(el('circle',{cx:X(p.x),cy:Y(p.y),r:s.r||6,fill:s.color,
+          stroke:dark?'#0B1026':'#FFFFFF','stroke-width':2.5}));
+        if(s.labels){
+          svg.appendChild(el('text',{x:X(p.x),y:Y(p.y)-14,'text-anchor':'middle',fill:s.color,
+            'font-size':'12','font-family':'IBM Plex Mono, monospace','font-weight':'500'},
+            s.labels(p)));
+        }
+      });
+    }
+  });
+}
+
+/* ============================================================
+   PANEL 1
+   ============================================================ */
+var state={cls:null,grp:null,relMode:false};
+
+function buildChips(box,list,suffix,onPick){
+  box.innerHTML='';
+  list.forEach(function(v){
+    var b=document.createElement('button');
+    b.textContent=v+suffix;
+    b.setAttribute('aria-pressed','false');
+    b.addEventListener('click',function(){
+      Array.prototype.forEach.call(box.children,function(c){c.setAttribute('aria-pressed','false');});
+      b.setAttribute('aria-pressed','true');
+      onPick(v);
+    });
+    box.appendChild(b);
+  });
+}
+buildChips(document.getElementById('clsChips'),CLASSES,'반',function(v){state.cls=v;tryLoad();});
+buildChips(document.getElementById('grpChips'),GROUPS,'모둠',function(v){state.grp=v;tryLoad();});
+
+var rowsEl=document.getElementById('rows');
+
+function makeRow(d,m){
+  var tr=document.createElement('tr');
+  tr.setAttribute('data-d',d);
+  tr.innerHTML=
+    '<td class="dist">'+d+' cm</td>'+
+    [0,1,2].map(function(k){
+      return '<td><input type="number" inputmode="decimal" class="m'+k+
+        '" placeholder="—" value="'+((m&&m[k]!=null)?m[k]:'')+'"></td>';
+    }).join('')+
+    '<td class="avg">—</td>';
+  [0,1,2].forEach(function(k){
+    tr.querySelector('.m'+k).addEventListener('input',refresh);
+  });
+  return tr;
+}
+function buildRows(list){
+  rowsEl.innerHTML='';
+  DISTS.forEach(function(d){
+    var m=[null,null,null];
+    if(list&&list.length){
+      list.forEach(function(r){if(Number(r.d)===d&&r.m)m=r.m;});
+    }
+    rowsEl.appendChild(makeRow(d,m));
+  });
+  refresh();
+}
+function readRows(){
+  return Array.prototype.map.call(rowsEl.children,function(tr){
+    return {d:parseFloat(tr.getAttribute('data-d')),
+      m:[0,1,2].map(function(k){
+        var v=parseFloat(tr.querySelector('.m'+k).value);
+        return isFinite(v)&&v>0?v:null;
+      })};
+  });
+}
+function avgOf(m){
+  var f=m.filter(function(v){return v!=null;});
+  return f.length?f.reduce(function(a,b){return a+b;},0)/f.length:null;
+}
+function measured(){
+  var out=[];
+  readRows().forEach(function(r){
+    var a=avgOf(r.m);
+    if(a!=null)out.push({d:r.d,l:a});
+  });
+  return out.sort(function(a,b){return a.d-b.d;});
+}
+function setRel(r){
+  state.relMode=r;
+  document.getElementById('modeLux').setAttribute('aria-pressed',r?'false':'true');
+  document.getElementById('modeRel').setAttribute('aria-pressed',r?'true':'false');
+  refresh();
+}
+document.getElementById('modeLux').addEventListener('click',function(){setRel(false);});
+document.getElementById('modeRel').addEventListener('click',function(){setRel(true);});
+
+function refresh(){
+  Array.prototype.forEach.call(rowsEl.children,function(tr){
+    var a=avgOf([0,1,2].map(function(k){
+      var v=parseFloat(tr.querySelector('.m'+k).value);
+      return isFinite(v)&&v>0?v:null;
+    }));
+    tr.querySelector('.avg').textContent=a==null?'—':fmt(a);
+  });
+  var data=measured(),series=[];
+  if(data.length>=2){
+    var base=data[0],rel=state.relMode,top=data[data.length-1].d*1.12,pts=[];
+    for(var i=0;i<=160;i++){
+      var dv=base.d+(top-base.d)*i/160;
+      pts.push({x:dv,y:(rel?1:base.l)*Math.pow(base.d/dv,2)});
+    }
+    series.push({color:'#FF7A59',w:2,dash:'6 4',pts:pts});
+    series.push({color:'#2A78D6',dots:true,
+      labels:function(p){return rel?p.y.toFixed(2):fmt(p.y);},
+      pts:data.map(function(p){return {x:p.d,y:rel?p.l/base.l:p.l};})});
+  }
+  drawChart(document.getElementById('chart'),{keep:1,series:series,
+    xLabel:'광원으로부터의 거리 (cm)',
+    yLabel:state.relMode?'첫 측정값에 대한 비율':'빛의 세기 (lx)',
+    empty:'두 거리 이상에서 잰 값을 넣어 주세요'});
+  analyse(data);
+}
+
+function analyse(data){
+  var v=document.getElementById('verdict');
+  if(data.length<2){
+    v.className='verdict none';
+    v.textContent='값을 두 줄 이상 넣으면 그래프와 분석이 나타납니다.';
+    return null;
+  }
+  var base=data[0],expo=expoOf(data),ratios=[];
+  data.forEach(function(p){
+    if(p!==base)ratios.push(p.l/(base.l*Math.pow(base.d/p.d,2)));
+  });
+  var avg=ratios.reduce(function(a,b){return a+b;},0)/ratios.length,
+      close=expo>1.75&&expo<2.3,html='';
+  v.className='verdict '+(close?'good':'warn');
+  html+='<strong>'+(close?'거리의 제곱에 반비례하는 관계가 잘 나타났습니다'
+    :'아직 거리의 제곱에 반비례하는 관계가 잘 보이지 않습니다')+'</strong>';
+  html+='측정값은 거리의 <span class="mono">'+expo.toFixed(1)+
+    '제곱</span>에 반비례하고 있습니다. 이론값은 <span class="mono">2제곱</span>입니다.<ul>';
+  data.forEach(function(p){
+    if(p===base)return;
+    html+='<li>거리가 '+fmt(p.d/base.d)+'배 → 예상 <span class="mono">'+
+      fmt(base.l*Math.pow(base.d/p.d,2))+' lx</span>, 측정 <span class="mono">'+fmt(p.l)+' lx</span></li>';
+  });
+  html+='</ul>';
+  if(!close){
+    if(avg>1.15){
+      html+='<p style="margin:10px 0 0">측정값이 예상보다 크게 나왔습니다. 다음을 확인해 보세요.</p><ul>'+
+        '<li>거리를 전구 중심이 아니라 스탠드 받침이나 갓에서부터 재지 않았나요</li>'+
+        '<li>주변 조명이나 벽·책상에서 반사된 빛이 함께 들어오지 않았나요</li>'+
+        '<li>광원에 너무 가까이서 재지는 않았나요</li></ul>';
+    }else if(avg<0.85){
+      html+='<p style="margin:10px 0 0">측정값이 예상보다 작게 나왔습니다. 다음을 확인해 보세요.</p><ul>'+
+        '<li>조도 센서가 광원을 똑바로 바라보고 있나요</li>'+
+        '<li>손이나 자, 거치대가 센서를 가리지 않았나요</li></ul>';
+    }else{
+      html+='<p style="margin:10px 0 0">값이 들쭉날쭉합니다. 같은 자리에서 두세 번 재어 평균을 내 보세요.</p>';
+    }
+  }
+  v.innerHTML=html;
+  return {expo:expo,avg:avg};
+}
+
+function tryLoad(){
+  var st=document.getElementById('loadStatus');
+  if(!state.cls||!state.grp){
+    st.className='status info';st.textContent='반과 모둠을 골라 주세요.';return;
+  }
+  st.className='status info';st.textContent='저장된 자료를 확인하는 중입니다…';
+  Store.load('grp:'+state.cls+'-'+state.grp).then(function(rec){
+    var sub=document.getElementById('submitStatus');
+    if(rec){
+      document.getElementById('members').value=rec.members||'';
+      buildRows(rec.rows);
+      st.className='status ok';
+      st.textContent=state.cls+'반 '+state.grp+'모둠의 저장된 자료를 불러왔습니다. 이어서 하면 됩니다.';
+      sub.className='status ok';
+      sub.textContent='이미 제출한 자료가 있습니다. 고쳐서 다시 제출할 수 있습니다.';
+    }else{
+      st.className='status info';
+      st.textContent=state.cls+'반 '+state.grp+'모둠 · 새로 시작합니다. ('+Store.label()+')';
+      sub.className='status info';
+      sub.textContent='아직 제출하지 않았습니다.';
+    }
+  });
+}
+
+document.getElementById('submitBtn').addEventListener('click',function(){
+  var st=document.getElementById('submitStatus'),btn=this;
+  if(!state.cls||!state.grp){
+    st.className='status err';st.textContent='반과 모둠을 먼저 골라 주세요.';return;
+  }
+  var members=document.getElementById('members').value.trim();
+  if(!members){
+    st.className='status err';st.textContent='모둠원 이름을 적어 주세요.';return;
+  }
+  var data=measured();
+  if(data.length<2){
+    st.className='status err';st.textContent='서로 다른 거리에서 잰 값을 두 개 이상 넣어 주세요.';return;
+  }
+  var e=expoOf(data),
+      rec={key:'grp:'+state.cls+'-'+state.grp,
+        cls:state.cls,grp:state.grp,members:members,
+        rows:readRows(),
+        expo:e==null?'':Number(e.toFixed(2)),
+        updated:new Date().toISOString()};
+  Store.saveLocalCopy(rec);
+  btn.disabled=true;
+  st.className='status info';st.textContent='제출하는 중입니다…';
+  Store.save(rec).then(function(){
+    btn.disabled=false;
+    st.className='status ok';
+    st.textContent='제출했습니다. ('+Store.label()+') 값을 고쳐서 다시 제출해도 됩니다.';
+    if(Store.mode==='local')showCode(rec);
+  }).catch(function(err){
+    btn.disabled=false;
+    st.className='status err';
+    st.textContent='제출하지 못했습니다: '+err.message+' 아래 제출 코드를 복사해 선생님께 전달해 주세요.';
+    showCode(rec);
+  });
+});
+function showCode(rec){
+  document.getElementById('codeArea').hidden=false;
+  var s=JSON.stringify(rec);
+  try{s=btoa(unescape(encodeURIComponent(s)));}catch(e){}
+  document.getElementById('codeOut').value=s;
+}
+document.getElementById('copyCode').addEventListener('click',function(){
+  var ta=document.getElementById('codeOut'),btn=this,old=btn.textContent;
+  ta.select();
+  var done=function(){btn.textContent='복사했습니다';setTimeout(function(){btn.textContent=old;},1600);};
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(ta.value).then(done,function(){
+      try{document.execCommand('copy');done();}catch(e){}
+    });
+  }else{try{document.execCommand('copy');done();}catch(e){}}
+});
+
+document.getElementById('savePng').addEventListener('click',function(){
+  var clone=document.getElementById('chart').cloneNode(true);
+  clone.setAttribute('xmlns',SVGNS);
+  clone.insertBefore(el('rect',{x:0,y:0,width:640,height:380,fill:'#FFFFFF'}),
+    clone.childNodes[1]||null);
+  var img=new Image();
+  img.onload=function(){
+    var c=document.createElement('canvas');c.width=1280;c.height=760;
+    var ctx=c.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,1280,760);
+    ctx.drawImage(img,0,0,1280,760);
+    var a=document.createElement('a');
+    a.download=(state.cls||'')+'반_'+(state.grp||'')+'모둠_그래프.png';
+    a.href=c.toDataURL('image/png');a.click();
+  };
+  img.onerror=function(){alert('이미지를 만들지 못했습니다. 화면을 캡처해 제출해 주세요.');};
+  img.src='data:image/svg+xml;charset=utf-8,'+
+    encodeURIComponent(new XMLSerializer().serializeToString(clone));
+});
+
+buildRows(null);
+
+/* ============================================================
+   PANEL 4 — 교사용
+   ============================================================ */
+var T={cls:'all',all:[],sel:null};
+
+function openTeacher(){
+  if(document.getElementById('pinIn').value!==String(CONFIG.TEACHER_PIN)){
+    document.getElementById('pinErr').hidden=false;return;
+  }
+  document.getElementById('pinErr').hidden=true;
+  document.getElementById('pinCard').hidden=true;
+  document.getElementById('tPanel').hidden=false;
+  buildTClsChips();
+  loadAll();
+}
+document.getElementById('pinBtn').addEventListener('click',openTeacher);
+document.getElementById('pinIn').addEventListener('keydown',function(e){
+  if(e.key==='Enter')openTeacher();
+});
+function buildTClsChips(){
+  var box=document.getElementById('tClsChips');
+  box.innerHTML='';
+  [['all','전체']].concat(CLASSES.map(function(c){return [c,c+'반'];})).forEach(function(pair){
+    var b=document.createElement('button');
+    b.textContent=pair[1];
+    b.setAttribute('aria-pressed',pair[0]===T.cls?'true':'false');
+    b.addEventListener('click',function(){
+      T.cls=pair[0];T.sel=null;
+      Array.prototype.forEach.call(box.children,function(c){c.setAttribute('aria-pressed','false');});
+      b.setAttribute('aria-pressed','true');
+      renderTeacher();
+    });
+    box.appendChild(b);
+  });
+}
+function loadAll(){
+  var st=document.getElementById('tStatus');
+  st.className='status info';st.textContent='자료를 불러오는 중입니다…';
+  Store.loadAll().then(function(list){
+    T.all=list.filter(function(r){return r&&r.key;});
+    st.className='status info';
+    st.textContent=T.all.length+'개 모둠의 자료를 불러왔습니다. ('+Store.label()+')';
+    renderTeacher();
+  }).catch(function(e){
+    st.className='status err';st.textContent='불러오지 못했습니다: '+e.message;
+  });
+}
+document.getElementById('tRefresh').addEventListener('click',loadAll);
+
+function recOf(c,g){
+  for(var i=0;i<T.all.length;i++){
+    if(Number(T.all[i].cls)===c&&Number(T.all[i].grp)===g)return T.all[i];
+  }
+  return null;
+}
+function ptsOf(rec){
+  if(!rec||!rec.rows)return [];
+  var out=[];
+  rec.rows.forEach(function(r){
+    var f=(r.m||[]).filter(function(v){return v!=null&&isFinite(v)&&v>0;});
+    if(f.length)out.push({d:Number(r.d),l:f.reduce(function(a,b){return a+b;},0)/f.length});
+  });
+  return out.sort(function(a,b){return a.d-b.d;});
+}
+function hd(txt){
+  var d=document.createElement('div');
+  d.className='hd';d.textContent=txt;return d;
+}
+function distLabel(rec){
+  var ds=ptsOf(rec).map(function(p){return p.d;});
+  return ds.length?ds.join(' · ')+' cm':'—';
+}
+
+function renderTeacher(){
+  var grid=document.getElementById('tGrid'),
+      classes=T.cls==='all'?CLASSES:[T.cls];
+  grid.innerHTML='';
+  grid.appendChild(hd(''));
+  GROUPS.forEach(function(g){grid.appendChild(hd(g+'모둠'));});
+  classes.forEach(function(c){
+    grid.appendChild(hd(c+'반'));
+    GROUPS.forEach(function(g){
+      var rec=recOf(c,g),cell=document.createElement('div');
+      if(!rec){
+        cell.className='cell empty';
+        cell.innerHTML='<span class="st">미제출</span>';
+      }else{
+        var pts=ptsOf(rec),
+            full=pts.length>=4;
+        cell.className='cell '+(full?'done':'part');
+        cell.innerHTML='<span class="nm">'+esc(String(rec.members||'').split(',')[0])+' 외</span>'+
+          '<span class="st">값 '+pts.length+'/4</span>';
+        cell.setAttribute('role','button');
+        cell.tabIndex=0;
+        if(T.sel&&T.sel.key===rec.key)cell.setAttribute('aria-current','true');
+        var pick=function(){
+          T.sel=rec;renderTeacher();
+          document.getElementById('tDetailCard').scrollIntoView({behavior:'smooth',block:'start'});
+        };
+        cell.addEventListener('click',pick);
+        cell.addEventListener('keydown',function(e){
+          if(e.key==='Enter'||e.key===' '){e.preventDefault();pick();}
+        });
+      }
+      grid.appendChild(cell);
+    });
+  });
+
+  var shown=[];
+  classes.forEach(function(c){GROUPS.forEach(function(g){
+    var r=recOf(c,g);if(r)shown.push(r);
+  });});
+  var exps=shown.map(function(r){return expoOf(ptsOf(r));})
+                .filter(function(v){return v!=null&&isFinite(v);}),
+      mean=exps.length?exps.reduce(function(a,b){return a+b;},0)/exps.length:null;
+  document.getElementById('tSummary').innerHTML=
+    '<span>제출 <b>'+shown.length+' / '+(classes.length*GROUPS.length)+'</b> 모둠</span>'+
+    (mean!=null?'<span>평균 지수 <b>'+mean.toFixed(2)+'</b> (이론값 2)</span>':'');
+
+  drawOverlay(shown);
+  renderDetail();
+}
+
+var PALETTE=['#2A78D6','#1BAF7A','#EDA100','#E87BA4','#9085E9','#00B7B7',
+             '#8FBF3F','#D95926','#7A9BE8','#C05FA0'];
+function drawOverlay(list){
+  var series=[],leg=[],theory=[];
+  for(var i=0;i<=120;i++){var x=1+3.3*i/120;theory.push({x:x,y:1/(x*x)});}
+  series.push({color:'#FF7A59',w:2.5,dash:'6 4',pts:theory});
+  list.forEach(function(rec,i){
+    var pts=ptsOf(rec);
+    if(pts.length<2)return;
+    var b=pts[0],c=PALETTE[i%PALETTE.length];
+    series.push({color:c,w:2,op:.85,dots:true,r:4,
+      pts:pts.map(function(p){return {x:p.d/b.d,y:p.l/b.l};})});
+    leg.push('<span><i class="swatch" style="background:'+c+'"></i>'+rec.cls+'-'+rec.grp+'</span>');
+  });
+  drawChart(document.getElementById('tChart'),{keep:0,dark:true,series:series,
+    xLabel:'첫 거리의 몇 배',yLabel:'첫 측정값의 몇 배',empty:'제출된 자료가 없습니다'});
+  document.getElementById('tLegend').innerHTML=
+    '<span><i class="swatch" style="background:#FF7A59"></i>이론값</span>'+leg.join('');
+}
+
+function renderDetail(){
+  var box=document.getElementById('tDetail'),rec=T.sel;
+  if(!rec){
+    box.innerHTML='<p class="lede" style="margin:0">위 표에서 모둠을 누르면 그 모둠의 측정값이 여기에 나타납니다.</p>';
+    return;
+  }
+  var pts=ptsOf(rec),e=expoOf(pts),b=pts[0];
+  var html='<div class="tmeta"><span><b>'+rec.cls+'반 '+rec.grp+'모둠</b></span>'+
+    '<span>'+esc(rec.members||'')+'</span>'+
+    '<span>거리 '+distLabel(rec)+'</span>'+
+    (e!=null?'<span>지수 <b>'+e.toFixed(2)+'</b></span>':'')+
+    '<span>'+esc(String(rec.updated||'').replace('T',' ').slice(0,16))+'</span></div>';
+
+  html+='<table class="mini"><thead><tr><th>거리</th><th>1회</th><th>2회</th><th>3회</th>'+
+    '<th>평균</th><th>첫 값 대비</th><th>이론값</th></tr></thead><tbody>';
+  (rec.rows||[]).forEach(function(r){
+    var f=(r.m||[]).filter(function(v){return v!=null&&isFinite(v)&&v>0;}),
+        a=f.length?f.reduce(function(x,y){return x+y;},0)/f.length:null,
+        th=(b&&a!=null)?b.l*Math.pow(b.d/r.d,2):null;
+    html+='<tr><td>'+r.d+' cm</td>'+
+      [0,1,2].map(function(k){
+        return '<td>'+((r.m&&r.m[k]!=null)?fmt(r.m[k]):'—')+'</td>';
+      }).join('')+
+      '<td>'+(a==null?'—':fmt(a))+'</td>'+
+      '<td>'+((a!=null&&b)?(a/b.l).toFixed(2):'—')+'</td>'+
+      '<td>'+(th==null?'—':fmt(th))+'</td></tr>';
+  });
+  html+='</tbody></table>';
+
+  box.innerHTML=html;
+}
+
+document.getElementById('tCsv').addEventListener('click',function(){
+  var classes=T.cls==='all'?CLASSES:[T.cls],rows=[];
+  rows.push(['반','모둠','모둠원','거리(cm)','1회','2회','3회','평균','첫값대비','지수n','제출시각']);
+  classes.forEach(function(c){
+    GROUPS.forEach(function(g){
+      var rec=recOf(c,g);
+      if(!rec)return;
+      var pts=ptsOf(rec),b=pts[0],e=expoOf(pts),first=true;
+      (rec.rows||[]).forEach(function(r){
+        var f=(r.m||[]).filter(function(v){return v!=null&&isFinite(v)&&v>0;}),
+            a=f.length?f.reduce(function(x,y){return x+y;},0)/f.length:null;
+        rows.push([c,g,rec.members||'',r.d,
+          (r.m&&r.m[0]!=null)?r.m[0]:'',(r.m&&r.m[1]!=null)?r.m[1]:'',(r.m&&r.m[2]!=null)?r.m[2]:'',
+          a==null?'':a.toFixed(1),(a!=null&&b)?(a/b.l).toFixed(3):'',
+          (first&&e!=null)?e.toFixed(2):'',
+          first?String(rec.updated||'').replace('T',' ').slice(0,16):'']);
+        first=false;
+      });
+    });
+  });
+  var csv='\uFEFF'+rows.map(function(r){
+    return r.map(function(v){return '"'+String(v).replace(/"/g,'""')+'"';}).join(',');
+  }).join('\n');
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));
+  a.download='별의밝기_측정기록.csv';
+  a.click();
+  setTimeout(function(){URL.revokeObjectURL(a.href);},2000);
+});
+
+document.getElementById('tImport').addEventListener('click',function(){
+  var s=window.prompt('모둠이 전달한 제출 코드를 붙여 넣으세요.');
+  if(!s)return;
+  var st=document.getElementById('tStatus');
+  try{
+    var txt=s.trim(),
+        rec=JSON.parse(txt.charAt(0)==='{'?txt:decodeURIComponent(escape(atob(txt))));
+    if(!rec.key)throw new Error('형식이 맞지 않습니다');
+    Store.saveLocalCopy(rec);
+    T.all=T.all.filter(function(r){return r.key!==rec.key;});
+    T.all.push(rec);
+    st.className='status ok';
+    st.textContent=rec.cls+'반 '+rec.grp+'모둠 자료를 넣었습니다.';
+    renderTeacher();
+  }catch(e){
+    st.className='status err';
+    st.textContent='코드를 읽지 못했습니다. 전체를 빠짐없이 붙여 넣었는지 확인해 주세요.';
+  }
+});
+
+/* ============================================================
+   starfield · tabs
+   ============================================================ */
+(function(){
+  var out='';
+  for(var i=0;i<90;i++){
+    out+='<circle cx="'+(Math.random()*100).toFixed(2)+'%" cy="'+
+      (Math.random()*100).toFixed(2)+'%" r="'+(Math.random()*1.3+.3).toFixed(2)+
+      '" fill="#fff" opacity="'+(Math.random()*.55+.12).toFixed(2)+'"/>';
+  }
+  document.getElementById('stars').innerHTML=out;
+})();
+(function(){
+  var arr=[['t1','p1'],['t4','p4']];
+  arr.forEach(function(pair){
+    document.getElementById(pair[0]).addEventListener('click',function(){
+      arr.forEach(function(p){
+        var sel=p[0]===pair[0];
+        document.getElementById(p[0]).setAttribute('aria-selected',sel?'true':'false');
+        document.getElementById(p[1]).hidden=!sel;
+      });
+      window.scrollTo({top:0,behavior:'smooth'});
+    });
+  });
+})();
+
+/* 시작 점검 — 화면이 제대로 만들어졌는지 확인합니다. */
+(function(){
+  var ok = document.getElementById('clsChips').children.length > 0 &&
+           document.getElementById('rows').children.length > 0;
+  if(!ok && window.__stellarError){
+    window.__stellarError('화면을 다 만들지 못했습니다. 브라우저를 새로 고침(Ctrl+F5)해 주세요.');
+  }
+})();
+
+})();
+</script>
+</body>
+</html>
